@@ -1,3 +1,27 @@
+/*
+ *    Filename: myled.c
+ *     Version: 0.1.0
+ * Description: driver for LED control
+ *     License: GPL
+ *
+ *      Author: Copyright (C) RyouyaSakai
+ *        Date: 2017
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License version 2 as
+ *  published by the Free Software Foundation.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
+
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/cdev.h>
@@ -9,7 +33,7 @@ MODULE_AUTHOR("RYOUYA SAKAI");
 MODULE_DESCRIPTION("driver for LED control");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("0.1");
-//ここまで前回
+//add1
 
 static dev_t dev;
 static struct cdev cdv;
@@ -44,7 +68,6 @@ static int __init init_mod(void)
 		return retval;
 
 	}
-	//ここまで前回場所
 	printk(KERN_INFO "%s is loaded. major:%d\n",__FILE__,MAJOR(dev));
 
 	cdev_init(&cdv, &led_fops);
@@ -54,7 +77,7 @@ static int __init init_mod(void)
 
 		return retval;
 	}
-//ここから追加
+//add2
 	cls = class_create(THIS_MODULE,"myled");
 	if(IS_ERR(cls)){
 		printk(KERN_ERR "class_create failed.");
